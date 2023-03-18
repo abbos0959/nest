@@ -1,3 +1,4 @@
+import { SerializeInterceptorAbbos } from './../interceptors/serialize.interseptors';
 import { UpdateUserDto } from './dto/update.user.dto';
 import { UsersService } from './users.service';
 import { UserEntity } from './user.entity';
@@ -9,6 +10,8 @@ import {
   Get,
   Param,
   Patch,
+  UseInterceptors,
+  ClassSerializerInterceptor,
   Delete,
 } from '@nestjs/common';
 
@@ -28,6 +31,7 @@ export class UsersController {
   UpdateUser(@Param('id') id: string, @Body() upd: UpdateUserDto) {
     return this.UserService.update(Number(id), upd);
   }
+  @UseInterceptors(SerializeInterceptorAbbos)
   @Get(':id')
   getByIdUser(@Param('id') id: string) {
     return this.UserService.findOne(Number(id));
