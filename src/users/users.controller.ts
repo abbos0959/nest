@@ -1,8 +1,10 @@
 import { SerializeInterceptorAbbos } from './../interceptors/serialize.interseptors';
+import { Serialise } from './../interceptors/serialize.interseptors';
 import { UpdateUserDto } from './dto/update.user.dto';
 import { UsersService } from './users.service';
 import { UserEntity } from './user.entity';
 import { UserDto } from './dto/create.user.dto';
+import { UserDtoSerialize } from './dto/user.dto';
 import {
   Controller,
   Post,
@@ -16,6 +18,7 @@ import {
 } from '@nestjs/common';
 
 @Controller('users')
+@Serialise(UserDtoSerialize)
 export class UsersController {
   constructor(private readonly UserService: UsersService) {}
   @Post('signup')
@@ -31,7 +34,7 @@ export class UsersController {
   UpdateUser(@Param('id') id: string, @Body() upd: UpdateUserDto) {
     return this.UserService.update(Number(id), upd);
   }
-  @UseInterceptors(SerializeInterceptorAbbos)
+  // @UseInterceptors(new SerializeInterceptorAbbos(UserDtoSerialize))
   @Get(':id')
   getByIdUser(@Param('id') id: string) {
     return this.UserService.findOne(Number(id));

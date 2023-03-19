@@ -1,5 +1,5 @@
 import { Expose, Exclude } from 'class-transformer';
-export class UserDto {
+export class UserDtoSerialize {
   @Expose()
   id: number;
   @Expose()
