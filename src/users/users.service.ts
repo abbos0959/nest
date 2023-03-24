@@ -9,17 +9,22 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private readonly UserRepositroy: Repository<UserEntity>,
   ) {}
-  async signUp({ ...body }) {
-    const user = await this.UserRepositroy.create(body);
+  async signUp(email: string, password: string) {
+    console.log(email, password);
+
+    const user = await this.UserRepositroy.create({ email, password });
     return this.UserRepositroy.save(user);
   }
 
   async findOne(id: number) {
+    if (!id) {
+      return null;
+    }
     return await this.UserRepositroy.findOne({ where: { id: id } });
   }
 
-  async find() {
-    return await this.UserRepositroy.find();
+  async find(email: string)   {
+    return await this.UserRepositroy.findOne({ where: { email: email } });
   }
 
   async update(id: number, update: UpdateUserDto) {
