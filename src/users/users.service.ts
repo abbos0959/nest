@@ -20,11 +20,11 @@ export class UsersService {
     if (!id) {
       return null;
     }
-    return await this.UserRepositroy.findOne({ where: { id: id } });
+    return await this.UserRepositroy.findOneBy({ id: id });
   }
 
-  async find(email: string)   {
-    return await this.UserRepositroy.findOne({ where: { email: email } });
+  async find(email: string) {
+    return await this.UserRepositroy.findOneBy({ email: email });
   }
 
   async update(id: number, update: UpdateUserDto) {

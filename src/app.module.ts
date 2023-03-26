@@ -1,6 +1,6 @@
 import { ReportsEntity } from './reports/report.entity';
 import { UserEntity } from './users/user.entity';
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';

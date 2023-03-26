@@ -1,6 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { UserEntity } from 'src/users/user.entity';
 
+console.log(UserEntity, 'salom qulvaccha');
+
 @Entity('reports')
 export class ReportsEntity {
   @PrimaryGeneratedColumn()
@@ -11,6 +13,8 @@ export class ReportsEntity {
   make: string;
   @Column()
   model: string;
+  @Column({ default: false })
+  approved: boolean;
   @Column()
   year: number;
   @Column()
